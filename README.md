@@ -2,7 +2,7 @@
 
 Database to hold data for the nflapi.
 
-More information on the inherited postgres portion of this is here:
+More information on the inherited postgres portion of this is [here](https://github.com/docker-library/docs/tree/master/postgres).
 
 ## Instructions
 
