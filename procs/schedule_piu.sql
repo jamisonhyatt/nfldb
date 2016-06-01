@@ -64,4 +64,31 @@ BEGIN
         values ( in_eid, in_gsis, in_season_type, in_week_num, in_game_time, in_game_datetime, in_home_team, in_home_score, in_away_team, in_away_score, now());
       END IF;
 END;
-$$ LANGUAGE plpgsql;
+$$ LANGUAGE plpgsql
+SECURITY DEFINER;
+
+REVOKE ALL ON FUNCTION InsertUpdateSchedule_p
+(  in_eid varchar(10)
+  , in_gsis int
+  , in_season_type char(4)
+  , in_week_num   int
+  , in_game_time  varchar(5)
+  , in_game_datetime timestamp
+  , in_home_team char(30)
+  , in_home_score int
+  , in_away_team char(3)
+  , in_away_score int
+) FROM nfl_api;
+
+GRANT EXECUTE ON FUNCTION InsertUpdateSchedule_p
+(  in_eid varchar(10)
+  , in_gsis int
+  , in_season_type char(4)
+  , in_week_num   int
+  , in_game_time  varchar(5)
+  , in_game_datetime timestamp
+  , in_home_team char(30)
+  , in_home_score int
+  , in_away_team char(3)
+  , in_away_score int
+) TO nfl_api;
