@@ -20,7 +20,14 @@ More information on the inherited postgres portion of this is [here](https://git
 
 ######run the image.  Make sure to pass in the required passwords (postgres, api user, sa user)
 
-`docker run -p 5432:5432 --name nfl_db -e POSTGRES_PASSWORD=root -e SA_PASS=sa -e API_PASS=nfl_api -d  nfldb`
+```
+docker run -p 5432:5432 --name nfl_db  \
+-e POSTGRES_PASSWORD=root \
+-e SA_PASS=sa \
+-e API_PASS=nfl_api \
+-e POSTGRES_DB=nfl \
+-d nfldb
+```
 
 ###### Success! Nfl DB should be exposed via 5432 to external clients with the postgres, sa and nfl_api users.
 
