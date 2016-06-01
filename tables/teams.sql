@@ -1,11 +1,3 @@
-
-#!/bin/bash
-set -e
-
-POSTGRES="psql --username ${POSTGRES_USER} nfl"
-
-
-$POSTGRES <<-EOSQL
 create table conference (
   conference char(3) not null primary key
   ,name varchar(30) not null
@@ -76,5 +68,3 @@ insert into team (team_id, city, nickname, division, conference) values
 ,('SF','San Francisco','49ers','West','NFC')
 ,('SEA','Seattle','Seahawks','West','NFC')
 ,('LA','Los Angeles','Rams','West','NFC');
-
-EOSQL

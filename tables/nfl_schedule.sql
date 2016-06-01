@@ -1,12 +1,3 @@
-
-#!/bin/bash
-set -e
-
-POSTGRES="psql --username ${POSTGRES_USER} nfl"
-
-
-$POSTGRES <<-EOSQL 
-
 create table nfl_schedule (
   id SERIAL PRIMARY KEY
   ,eid varchar(10) not null
@@ -28,5 +19,3 @@ create table nfl_schedule (
   ,constraint un2_nfl_schedule unique  (gsis)
   ,constraint un3_nfl_schedule unique  (season_type, week_num, home_team, away_team)
 );
-
-EOSQL

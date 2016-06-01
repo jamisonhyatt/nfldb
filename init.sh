@@ -14,4 +14,6 @@ echo "Creating database role: nfl_api"
 
 $POSTGRES <<-EOSQL
 CREATE USER nfl_api WITH PASSWORD '${API_PASS}';
+grant connect on database nfl to nfl_api;
+GRANT USAGE ON SCHEMA public TO nfl_api;
 EOSQL

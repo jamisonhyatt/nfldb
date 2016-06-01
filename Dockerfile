@@ -2,11 +2,14 @@ FROM postgres:9.5
 MAINTAINER Jamison Hyatt
 
 #Shell Scripts (100)
-copy ./create_users.sh  /docker-entrypoint-initdb.d/120-create_user.sh
+copy ./init.sh  /docker-entrypoint-initdb.d/110-init.sh
 
-#SQL Scripts (200)
-copy ./create_nfl_db.sql   	/docker-entrypoint-initdb.d/200-createdb.sql
-copy ./season_type.sh  /docker-entrypoint-initdb.d/210-season_type.sh
-copy ./teams.sh 	/docker-entrypoint-initdb.d/220-teams.sh
-copy ./nfl_schedule.sh	/docker-entrypoint-initdb.d/230-nfl_schedule.sh
+#Table SQL Scripts (200)
+copy ./tables/season_type.sql  /docker-entrypoint-initdb.d/210-season_type.sql
+copy ./tables/teams.sql 	/docker-entrypoint-initdb.d/220-teams.sql
+copy ./tables/nfl_schedule.sql	/docker-entrypoint-initdb.d/230-nfl_schedule.sql
 
+
+#Proc SQL Scripts (300)
+copy ./procs/schedule_piu.sql  /docker-entrypoint-initdb.d/310-schedule_piu.sql
+copy ./procs/get_team.sql	/docker-entrypoint-initdb.d/320-get_team.sql
