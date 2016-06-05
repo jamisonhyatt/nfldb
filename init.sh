@@ -16,4 +16,5 @@ $POSTGRES <<-EOSQL
 CREATE USER nfl_api WITH PASSWORD '${API_PASS}';
 grant connect on database nfl to nfl_api;
 GRANT USAGE ON SCHEMA public TO nfl_api;
+GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA public to nfl_api;
 EOSQL

@@ -45,7 +45,7 @@ insert into team (team_id, city, nickname, division, conference) values
 ,('PIT','Pittsburgh','Steelers','North','AFC')
 ,('CLE','Cleveland','Browns','North','AFC')
 ,('TEN','Tennessee','Titans','South','AFC')
-,('JAC','Jacksonville','Jaguars','South','AFC')
+,('JAX','Jacksonville','Jaguars','South','AFC')
 ,('HOU','Houston','Texans','South','AFC')
 ,('IND','Indianapolis','Colts','South','AFC')
 ,('DEN','Denver','Broncos','West','AFC')
