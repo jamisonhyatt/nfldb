@@ -20,7 +20,4 @@ create table nfl_schedule (
   ,primary key (season, season_type, week_num, home_team, away_team)
 );
 
-GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA public to nfl_api;
-
-grant usage, select ON ALL SEQUENCES IN SCHEMA public to nfl_api;
-
+GRANT SELECT, INSERT, UPDATE, DELETE ON table nfl_schedule to read_write;

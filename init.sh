@@ -3,18 +3,28 @@ set -e
 
 POSTGRES="psql --username ${POSTGRES_USER}"
 
-echo "Creating database role: sa"
-
 $POSTGRES <<-EOSQL
-CREATE USER sa WITH PASSWORD '${SA_PASS}' SUPERUSER CREATEDB CREATEROLE INHERIT LOGIN;;
-EOSQL
 
+--create empty roles
+CREATE ROLE read_only with NOLOGIN;
+CREATE ROLE read_write with NOLOGIN;
 
-echo "Creating database role: nfl_api"
+--Create our User with passwords set in the environment spinup
+CREATE ROLE sa WITH LOGIN ENCRYPTED PASSWORD '${SA_PASS}' SUPERUSER CREATEDB CREATEROLE INHERIT;
+CREATE ROLE nfl_api WITH LOGIN ENCRYPTED PASSWORD '${API_PASS}' IN ROLE read_write INHERIT;
 
-$POSTGRES <<-EOSQL
-CREATE USER nfl_api WITH PASSWORD '${API_PASS}';
-grant connect on database nfl to nfl_api;
-GRANT USAGE ON SCHEMA public TO nfl_api;
-GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA public to nfl_api;
+--ACCESS DB
+REVOKE CONNECT ON DATABASE ${POSTGRES_DB} FROM PUBLIC;
+GRANT  CONNECT ON DATABASE ${POSTGRES_DB} TO nfl_api, sa;
+
+--ACCESS SCHEMA
+REVOKE ALL     ON SCHEMA public FROM PUBLIC;
+GRANT  USAGE   ON SCHEMA public  TO nfl_api,read_only,read_write ;
+
+REVOKE ALL ON SEQUENCES FROM PUBLIC;
+GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA public TO read_write, read_only;
+
+--ACCESS TABLES
+REVOKE ALL ON ALL TABLES IN SCHEMA public FROM PUBLIC ;
+
 EOSQL

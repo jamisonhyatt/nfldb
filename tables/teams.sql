@@ -3,6 +3,9 @@ create table conference (
   ,name varchar(30) not null
 );
 
+GRANT SELECT, INSERT, UPDATE, DELETE ON table conference to read_write;
+
+
 insert into conference 
 select 'NFC', 'National Football Conference'
 union

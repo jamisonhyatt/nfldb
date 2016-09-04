@@ -4,6 +4,8 @@ create table season_type (
   weekNumStart int not null,
   weekNumEnd int not null
 );
+
+GRANT SELECT, INSERT, UPDATE, DELETE ON table season_type to read_write;
 insert into season_type
 select
   'PRE', 'Preaseason', 0, 4
